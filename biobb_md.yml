@@ -374,16 +374,18 @@ components:
                                 type: object
                                 default: defaults dict
                                 description: MDP options specification. (Used if input_mdp_path is None)
-                            type:
-                                type: string
-                                default: minimization
-                                description: Default options for the mdp file.
-                                values:
-                                    - minimization
-                                    - nvt
-                                    - npt
-                                    - free
-                                    - index
+                                additionalProperties: True
+                                properties:
+                                    type:
+                                        type: string
+                                        default: minimization
+                                        description: Default options for the mdp file.
+                                        values:
+                                            - minimization
+                                            - nvt
+                                            - npt
+                                            - free
+                                            - index
                         output_mdp_path:
                             type: string
                             default: grompp.mdp
