@@ -1,0 +1,427 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "biobb MD interface",
+        "version": 0.1
+    },
+    "paths": {
+        "/editconf": {
+            "post": {
+                "description": "Wrapper class for the GROMACS editconf (http://manual.gromacs.org/current/onlinehelp/gmx-editconf.html) module",
+                "operationId": "editconf",
+                "requestBody": {
+                    "description": "editconf parameter set",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/editconf"
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "stdout and stderr from operations",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/logs"
+                            }
+                        }
+                    }
+                }
+            },
+"            "default": {
+                "description": "unexpected error",
+                "content": {
+                    "application/json": {
+                        "schema": null,
+                        "$ref": "#/components/schemas/Error"
+                    }
+                }
+            }
+"        },
+        "/genion": {
+            "post": {
+                "description": "Wrapper class for the GROMACS genion (http://manual.gromacs.org/current/onlinehelp/gmx-genion.html) module.",
+                "operationId": "genion",
+                "requestBody": {
+                    "description": "genion parameter set",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/genion"
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "stdout and stderr from operations",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/logs"
+                            }
+                        }
+                    }
+                }
+            },
+            "default": {
+                "description": "unexpected error",
+                "content": {
+                    "application/json": {
+                        "schema": null,
+                        "$ref": "#/components/schemas/Error"
+                    }
+                }
+            }
+        },
+        "/genrestr": {
+            "post": {
+                "description": "Wrapper class for the GROMACS genrestr (http://manual.gromacs.org/current/onlinehelp/gmx-genrestr.html) module.",
+                "operationId": "genrestr",
+                "requestBody": {
+                    "description": null,
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/genrestr"
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "stdout and stderr from operations",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/logs"
+                            }
+                        }
+                    }
+                }
+            },
+            "default": {
+                "description": "unexpected error",
+                "content": {
+                    "application/json": {
+                        "schema": null,
+                        "$ref": "#/components/schemas/Error"
+                    }
+                }
+            }
+        },
+        "/grompp": {
+            "post": {
+                "description": "Wrapper of the GROMACS grompp module. The GROMACS preprocessor module needs to be feeded with the input system and the dynamics parameters to create a portable binary run input file TPR. The dynamics parameters are specified in the mdp section of the configuration YAML file. The parameter names and defaults are the same as the ones in the official MDP specification: http://manual.gromacs.org/current/online/mdp_opt.html",
+                "operationId": "grompp",
+                "requestBody": {
+                    "description": "grompp parameter set",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/grompp"
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "stdout and stderr from operations",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/logs"
+                            }
+                        }
+                    }
+                },
+                "default": {
+                    "description": "unexpected error",
+                    "content": {
+                        "application/json": {
+                            "schema": null,
+                            "$ref": "#/components/schemas/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/make_ndx": {
+            "post": {
+                "description": "Wrapper of the GROMACS make_ndx (http://manual.gromacs.org/current/onlinehelp/gmx-make_ndx.html) module.",
+                "operationId": "make_ndx",
+                "requestBody": {
+                    "description": "make_ndx parameter set",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/make_ndx"
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "stdout and stderr from operations",
+                    "content": null,
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/logs"
+                        }
+                    }
+                }
+            },
+            "default": {
+                "description": "unexpected error",
+                "content": {
+                    "application/json": {
+                        "schema": null,
+                        "$ref": "#/components/schemas/Error"
+                    }
+                }
+            }
+        },
+        "/mdrun": {
+            "post": {
+                "description": "Wrapper of the GROMACS of the mdrun module",
+                "operationId": "mdrun",
+                "requestBody": {
+                    "description": "mdrun parameter set",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/mdrun"
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "stdout and stderr from operations",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/logs"
+                            }
+                        }
+                    }
+                }
+            },
+            "default": {
+                "description": "unexpected error",
+                "content": {
+                    "application/json": {
+                        "schema": null,
+                        "$ref": "#/components/schemas/Error"
+                    }
+                }
+            }
+        },
+        "/pdb2gmx": {
+            "post": {
+                "description": "Wrapper class for the GROMACS pdb2gmx (http://manual.gromacs.org/current/onlinehelp/gmx-pdb2gmx.html) module",
+                "operationId": "pdb2gmx",
+                "requestBody": {
+                    "description": "pdb2gmx parameter set",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/pdb2gmx"
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "stdout and stderr from operations",
+                    "content": null,
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/logs"
+                        }
+                    }
+                }
+            },
+            "default": {
+                "description": "unexpected error",
+                "content": {
+                    "application/json": {
+                        "schema": null,
+                        "$ref": "#/components/schemas/Error"
+                    }
+                }
+            }
+        },
+        "/solvate": {
+            "post": {
+                "description": "Wrapper of the GROMACS solvate (http://manual.gromacs.org/current/onlinehelp/gmx-editconf.html) module",
+                "operationId": "solvate",
+                "requestBody": {
+                    "description": "solvate parameter set",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/solvate"
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "stdout and stderr from operations",
+                    "content": null,
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/logs"
+                        }
+                    }
+                }
+            },
+            "default": {
+                "description": "unexpected error",
+                "content": {
+                    "application/json": {
+                        "schema": null,
+                        "$ref": "#/components/schemas/Error"
+                    }
+                }
+            }
+        },
+        "/ndx2resttop": {
+            "post": {
+                "description": "Generate a restrained topology from an index NDX file",
+                "operationId": "ndx2resttop",
+                "requestBody": {
+                    "description": "ndx2resttop parameter set",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ndx2resttop"
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "stdout and stderr from operations",
+                    "content": null,
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/logs"
+                        }
+                    }
+                }
+            },
+            "default": {
+                "description": "unexpected error",
+                "content": {
+                    "application/json": {
+                        "schema": null,
+                        "$ref": "#/components/schemas/Error"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "editconf": {
+                "schema": {
+                    "$ref": "editconf.json"
+                }
+            },
+            "genion": {
+                "schema": {
+                    "$ref": "genion.json"
+                }
+            },
+            "genrestr": {
+                "schema": {
+                    "$ref": "genrestr.json"
+                }
+            },
+            "grompp": {
+                "schema": {
+                    "$ref": "grompp.json"
+                }
+            },
+            "make_ndx": {
+                "schema": {
+                    "$ref": "make_ndx.json"
+                }
+            },
+            "mdrun": {
+                "schema": {
+                    "$ref": "mdrun.json"
+                }
+            },
+            "pdb2gmx": {
+                "schema": {
+                    "$ref": "pdb2gmx.json"
+                }
+            },
+            "solvate": {
+                "schema": {
+                    "$ref": "solvate.json"
+                }
+            },
+            "ndx2resttop": {
+                "schema": {
+                    "$ref": "ndx2resttop.json"
+                }
+            },
+            "logs": {
+                "required": [
+                    "stdout",
+                    "stderr"
+                ],
+                "properties": {
+                    "stdout": {
+                        "type": "string",
+                        "description": "Redirected standard out from operations"
+                    },
+                    "stderr": {
+                        "type": "string",
+                        "description": "Redirected standard error from operations"
+                    }
+                }
+            },
+            "Error": {
+                "required": [
+                    "code",
+                    "message"
+                ],
+                "properties": {
+                    "code": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

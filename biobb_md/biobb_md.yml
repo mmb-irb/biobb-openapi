@@ -1,275 +1,628 @@
 openapi: 3.0.0
 info:
-    title: biobb MD interface
-    version: 0.1
+  title: biobb MD interface
+  version: '0.1'
+servers:
+  - url: 'http://mmb.irbbarcelona.org/api/v0.1/biobb_md'
 paths:
-    /editconf:
-        post:
-            description: Wrapper class for the GROMACS editconf (http://manual.gromacs.org/current/onlinehelp/gmx-editconf.html) module
-            operationId: editconf
-            requestBody:
-                description: editconf parameter set
-                required: true
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/editconf'
-        responses:
-            '200':
-                description: stdout and stderr from operations
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/logs'
+  /editconf:
+    post:
+      operationId: editconf
+      description: >-
+        Wrapper class for the GROMACS editconf
+        (http://manual.gromacs.org/current/onlinehelp/gmx-editconf.html) module
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/editconf'
+      responses:
+        '200':
+          description: stdout and stderr   from operations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/logs'
         default:
-            description: unexpected error
-            content:
-                application/json:
-                    schema:
-                    $ref: '#/components/schemas/Error'
-    /genion:
-        post:
-            description: Wrapper class for the GROMACS genion (http://manual.gromacs.org/current/onlinehelp/gmx-genion.html) module.
-            operationId: genion
-            requestBody:
-                description: genion parameter set
-                required: true
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/genion'
-        responses:
-            '200':
-                description: stdout and stderr from operations
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/logs'
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /genion:
+    post:
+      operationId: genion
+      description: >-
+        Wrapper class for the GROMACS genion
+        (http://manual.gromacs.org/current/onlinehelp/gmx-genion.html) module
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/genion'
+      responses:
+        '200':
+          description: stdout and stderr from operations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/logs'
         default:
-            description: unexpected error
-            content:
-                application/json:
-                    schema:
-                    $ref: '#/components/schemas/Error'
-    /genrestr:
-        post:
-            description: Wrapper class for the GROMACS genrestr (http://manual.gromacs.org/current/onlinehelp/gmx-genrestr.html) module.
-            operationId: genrestr
-            requestBody:
-                description: 
-                required: true
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/genrestr'
-        responses:
-            '200':
-                description: stdout and stderr from operations
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/logs'
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /genrestr:
+    post:
+      operationId: genrestr
+      description: >-
+        Wrapper class for the GROMACS genrestr
+        (http://manual.gromacs.org/current/onlinehelp/gmx-genrestr.html) module
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/genrestr'
+      responses:
+        '200':
+          description: stdout and stderr from operations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/logs'
         default:
-            description: unexpected error
-            content:
-                application/json:
-                    schema:
-                    $ref: '#/components/schemas/Error'
-    /grompp:
-        post:
-            description: Wrapper of the GROMACS grompp module. The GROMACS preprocessor module needs to be feeded with the input system and the dynamics parameters to create a portable binary run input file TPR. The dynamics parameters are specified in the mdp section of the configuration YAML file. The parameter names and defaults are the same as the ones in the official MDP specification: http://manual.gromacs.org/current/online/mdp_opt.html
-            operationId: grompp
-            requestBody: 
-                description: grompp parameter set
-                required: true
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/grompp'
-        responses:
-            '200':
-                description: stdout and stderr from operations
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/logs'
-            default:
-                description: unexpected error
-                content:
-                    application/json:
-                        schema:
-                        $ref: '#/components/schemas/Error'
-    /make_ndx:
-        post:
-            description: Wrapper of the GROMACS make_ndx (http://manual.gromacs.org/current/onlinehelp/gmx-make_ndx.html) module.
-            operationId: make_ndx
-            requestBody:
-                description: make_ndx parameter set
-                required: true
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/make_ndx'
-        responses:
-            '200':
-                description: stdout and stderr from operations
-                content:
-                application/json:
-                    schema:
-                        $ref: '#/components/schemas/logs'
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /grompp:
+    post:
+      operationId: grompp
+      description: >-
+        Wrapper class for the GROMACS grompp
+        (http://manual.gromacs.org/current/onlinehelp/gmx-grompp.html) module
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/grompp'
+      responses:
+        '200':
+          description: stdout and stderr from operations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/logs'
         default:
-            description: unexpected error
-            content:
-                application/json:
-                    schema:
-                    $ref: '#/components/schemas/Error'
-    /mdrun:
-        post:
-            description: Wrapper of the GROMACS of the mdrun module
-            operationId: mdrun
-            requestBody:
-                description: mdrun parameter set
-                required: true
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/mdrun'
-        responses:
-            '200':
-                description: stdout and stderr from operations
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/logs'
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /make_ndx:
+    post:
+      operationId: make_ndx
+      description: >-
+        Wrapper class for the GROMACS make_ndx
+        (http://manual.gromacs.org/current/onlinehelp/gmx-make_ndx.html) module
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/make_ndx'
+      responses:
+        '200':
+          description: stdout and stderr from operations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/logs'
         default:
-            description: unexpected error
-            content:
-                application/json:
-                    schema:
-                    $ref: '#/components/schemas/Error'
-    /pdb2gmx:
-        post:
-            description: Wrapper class for the GROMACS pdb2gmx (http://manual.gromacs.org/current/onlinehelp/gmx-pdb2gmx.html) module
-            operationId: pdb2gmx
-            requestBody:
-                description: pdb2gmx parameter set
-                required: true
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/pdb2gmx'
-        responses:
-            '200':
-                description: stdout and stderr from operations
-                content:
-                application/json:
-                    schema:
-                        $ref: '#/components/schemas/logs'
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /mdrun:
+    post:
+      operationId: mdrun
+      description: >-
+        Wrapper class for the GROMACS mmdrun
+        (http://manual.gromacs.org/current/onlinehelp/gmx-mdrun.html) module
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/mdrun'
+      responses:
+        '200':
+          description: stdout and stderr from operations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/logs'
         default:
-            description: unexpected error
-            content:
-                application/json:
-                    schema:
-                    $ref: '#/components/schemas/Error'
-    /solvate:
-        post:
-            description: Wrapper of the GROMACS solvate (http://manual.gromacs.org/current/onlinehelp/gmx-editconf.html) module
-            operationId: solvate
-            requestBody:
-                description: solvate parameter set
-                required: true
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/solvate'
-        responses:
-            '200':
-                description: stdout and stderr from operations
-                content:
-                application/json:
-                    schema:
-                        $ref: '#/components/schemas/logs'
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /ndx2resttop:
+    post:
+      operationId: ndx2resttop
+      description: >-
+        Wrapper class for the GROMACS ndx2resttop
+        (http://manual.gromacs.org/current/onlinehelp/gmx-ndx2resttop.html) module
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ndx2resttop'
+      responses:
+        '200':
+          description: stdout and stderr from operations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/logs'
         default:
-            description: unexpected error
-            content:
-                application/json:
-                    schema:
-                    $ref: '#/components/schemas/Error'
-    /ndx2resttop:
-        post:
-            description: Generate a restrained topology from an index NDX file
-            operationId: ndx2resttop
-            requestBody:
-                description: ndx2resttop parameter set
-                required: true
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/ndx2resttop'
-        responses:
-            '200':
-                description: stdout and stderr from operations 
-                content:
-                application/json:
-                    schema:
-                        $ref: '#/components/schemas/logs'
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /solvate:
+    post:
+      operationId: solvate
+      description: >-
+        Wrapper class for the GROMACS solvate
+        (http://manual.gromacs.org/current/onlinehelp/gmx-solvate.html) module
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/solvate'
+      responses:
+        '200':
+          description: stdout and stderr from operations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/logs'
         default:
-            description: unexpected error
-            content:
-                application/json:
-                    schema:
-                    $ref: '#/components/schemas/Error'
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /pdb2gmx:
+    post:
+      operationId: pdb2gmx
+      description: >-
+        Wrapper class for the GROMACS pdb2gmx
+        (http://manual.gromacs.org/current/onlinehelp/gmx-pdb2gmx.html) module
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/pdb2gmx'
+      responses:
+        '200':
+          description: stdout and stderr from operations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/logs'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
 components:
-    schemas:
-        editconf:
-            schema:
-                $ref: 'editconf.json'
-        genion:
-            schema:
-                $ref: 'genion.json'
-        genrestr:
-            schema:
-                $ref: 'genrestr.json'
-        grompp:
-            schema:
-                $ref: 'grompp.json'
-        make_ndx:
-            schema:
-                $ref: 'make_ndx.json'
-        mdrun:
-            schema:
-                $ref: 'mdrun.json'
-        pdb2gmx:
-            schema:
-                $ref: 'pdb2gmx.json'
-        solvate:
-            schema:
-                $ref: 'solvate.json'
-        ndx2resttop:
-            schema:
-                $ref: 'ndx2resttop.json'
-        logs:
-            required:
-                - stdout
-                - stderr
-            properties:
-                stdout:
+  schemas:
+    editconf:
+      title: 'Wrapper class for the GROMACS editconf (http://manual.gromacs.org/current/onlinehelp/gmx-editconf.html) module'
+      type: object
+      required:
+        - input_gro_path
+        - output_gro_path
+      properties:
+        input_gro_path:
+          type: string
+          description: Path to the input GRO file
+        output_gro_path:
+          type: string
+          description: Path to the output GRO file
+        properties:
+          type: object
+          properties:
+            distance_to_molecule:
+              type: number
+              default: 1
+              description: Distance of the box from the outermost atom in nm. ie 1.0nm (10 Angstroms)
+            box_type:
+              type: string
+              default: cubic
+              description: Geometrical shape of the solvent box
+              enum:
+                - triclinic
+                - cubic
+                - dodecahedron
+                - octahedron
+            center_molecule:
+              type: boolean
+              default: true
+              description: Center molecule in the box
+            gmx_path:
+              type: string
+              default: gmx
+              description: Path to the GROMACS executable binary
+      additionalProperties: false
+    genion:
+      title: 'Wrapper class for the GROMACS genion (http://manual.gromacs.org/current/onlinehelp/gmx-genion.html) module'
+      type: object
+      required:
+        - input_tpr_path
+        - output_gro_path
+        - input_top_zip_path
+        - output_top_zip_path
+      properties:
+        input_tpr_path:
+          type: string
+          description: Path to the input portable run input TPR file.
+        output_gro_path:
+          type: string
+          description: Path to the input structure GRO file.
+        input_top_zip_path:
+          type: string
+          description: Path the input TOP topology in zip format.
+        output_top_zip_path:
+          type: string
+          description: Path the output topology TOP and ITP files zipball.
+        properties:
+          type: object
+          properties:
+            output_top_path:
+              type: string
+              default: gio.top
+              description: Path the output topology TOP file.
+            replaced_group:
+              type: string
+              default: SOL
+              description: Group of molecules that will be replaced by the solvent.
+            neutral:
+              type: boolean
+              default: false
+              description: Neutralize the charge of the system.
+            concentration:
+              type: number
+              default: 0.05
+              description: Concentration of the ions in (mol/liter).
+            seed:
+              type: integer
+              default: 1993
+              description: Seed for random number generator.
+            gmx_path:
+              type: string
+              default: gmx
+              description: Path to the GROMACS executable binary.
+        additionalProperties: false
+    genrestr:
+      title: 'Wrapper class for the GROMACS genrestr (http://manual.gromacs.org/current/onlinehelp/gmx-genrestr.html) module'
+      type: object
+      required:
+        - input_structure_path
+        - input_ndx_path
+        - input_top_zip_path
+        - output_top_zip_path
+      properties:
+        input_structure_path:
+          type: string
+          description: 'Path to the input structure PDB, GRO or TPR format.'
+        input_ndx_path:
+          type: string
+          description: 'Path to the input GROMACS index file, NDX format.'
+        input_top_zip_path:
+          type: string
+          description: Path the input TOP topology in zip format.
+        output_top_zip_path:
+          type: string
+          description: Path the output TOP topology in zip format.
+        properties:
+          type: object
+          properties:
+            output_top_path:
+              type: string
+              default: restrain.top
+              description: Path the output TOP file.
+            output_itp_path:
+              type: string
+              default: restrain.itp
+              description: Path to the output include for topology ITP file.
+            force_constants:
+              type: string
+              default: 500 500 500
+              description: Array of three floats defining the force constants
+            gmx_path:
+              type: string
+              default: gmx
+              description: Path to the GROMACS executable binary
+      additionalProperties: false
+    grompp:
+      title: 'Wrapper of the GROMACS grompp module. The GROMACS preprocessor module needs to be feeded with the input system and the dynamics parameters to create a portable binary run input file TPR. The dynamics parameters are specified in the mdp section of the configuration YAML file. The parameter names and defaults are the same as the ones in the official MDP specification: http://manual.gromacs.org/current/online/mdp_opt.html'
+      type: object
+      required:
+        - input_gro_path
+        - input_top_zip_path
+        - output_tpr_path
+        - input_cpt_path
+      properties:
+        input_gro_path:
+          type: string
+          description: Path to the input GROMACS structure GRO file.
+        input_top_zip_path:
+          type: string
+          description: Path the input GROMACS topology TOP and ITP files in zip format.
+        output_tpr_path:
+          type: string
+          description: Path to the output portable binary run file TPR.
+        input_cpt_path:
+          type: string
+          description: Path to the input GROMACS checkpoint file CPT.
+        properties:
+          type: object
+          properties:
+            oneOf:
+              input_mdp_path:
+                type: string
+                description: Path of the input MDP file.
+              mdp:
+                type: object
+                default: defaults dict
+                description: MDP options specification. (Used if input_mdp_path is None)
+                additionalProperties: true
+                properties:
+                  type:
                     type: string
-                    description: Redirected standard out from operations
-                stderr:
-                    type: string
-                    description: Redirected standard error from operations
-        
-        Error:
-            required:
-                - code
-                - message
-            properties:
-                code:
-                    type: integer
-                    format: int32
-                message:
-                    type: string
-                        
-
-
+                    default: minimization
+                    description: Default options for the mdp file.
+                    enum:
+                      - minimization
+                      - nvt
+                      - npt
+                      - free
+                      - index
+            output_mdp_path:
+              type: string
+              default: grompp.mdp
+              description: Path of the output MDP file.
+            output_top_path:
+              type: string
+              default: grompp.top
+              description: Path the output topology TOP file.
+            maxwarn:
+              type: integer
+              default: 10
+              description: Maximum number of allowed warnings.
+            gmx_path:
+              type: string
+              default: gmx
+              description: Path to the GROMACS executable binary.
+      additionalProperties: false
+    
+    make_ndx:
+      title: 'Wrapper of the GROMACS make_ndx (http://manual.gromacs.org/current/onlinehelp/gmx-make_ndx.html) module'
+      required:
+        - input_structure_pat
+        - output_ndx_path
+      properties:
+        input_structure_path:
+          type: string
+          description: Path to the input GRO/PDB/TPR file.
+        output_ndx_path:
+          type: string
+          description: Path to the output index NDX file.
+        properties:
+          type: object
+          properties:
+            selection:
+              type: string
+              default: CA C N O
+              description: Heavy atoms. Atom selection string.
+            gmx_path:
+              type: string
+              default: gmx
+              description: Path to the GROMACS executable binary.
+      additionalProperties: false
+    mdrun:
+      title: Wrapper of the mdrun module from GROMACS
+      type: object
+      required:
+        - input_tpr_path
+        - output_trr_path
+        - output_gro_path
+        - output_edr_path
+        - output_log_path
+        - output_xtc_path
+        - output_cpt_path
+      properties:
+        input_tpr_path:
+          type: string
+          description: Path to the portable binary run input file TPR.
+        output_trr_path:
+          type: string
+          description: Path to the GROMACS uncompressed raw trajectory file TRR.
+        output_gro_path:
+          type: string
+          description: Path to the output GROMACS structure GRO file.
+        output_edr_path:
+          type: string
+          description: Path to the output GROMACS portable energy file EDR.
+        output_log_path:
+          type: string
+          description: Path to the output GROMACS trajectory log file LOG.
+        output_xtc_path:
+          type: string
+          description: Path to the GROMACS compressed trajectory file XTC.
+        output_cpt_path:
+          type: string
+          description: Path to the output GROMACS checkpoint file CPT.
+        properties:
+          type: object
+          properties:
+            num_threads:
+              type: integer
+              default: 0
+              description: Let GROMACS guess. The number of threads that are going to be used
+            gmx_path:
+              type: string
+              default: gmx
+              description: Path to the GROMACS executable binary
+      additionalProperties: false
+    ndx2resttop:
+      title: Generate a restrained topology from an index NDX file
+      type: object
+      required:
+        - input_ndx_path
+        - input_top_zip_path
+        - output_top_zip_path
+      properties:
+        input_ndx_path:
+          type: string
+          description: Path to the input NDX index file.
+        input_top_zip_path:
+          type: string
+          description: Path the input TOP topology in zip format.
+        output_top_zip_path:
+          type: string
+          description: Path the output TOP topology in zip format.
+        properties:
+          type: object
+          properties:
+            force_constants:
+              type: string
+              default: 500 500 500
+              description: Array of three floats defining the force constants.
+            ref_rest_chain_triplet_list:
+              type: string
+              description: 'Triplet list composed by (reference group, restrain group, chain) list.'
+      additionalProperties: false
+    pdb2gmx:
+      title: 'Wrapper class for the GROMACS pdb2gmx (http://manual.gromacs.org/current/onlinehelp/gmx-pdb2gmx.html) module'
+      type: object
+      required:
+        - input_pdb_path
+        - output_gro_path
+        - output_top_zip_path
+      properties:
+        input_pdb_path:
+          type: string
+          description: Path to the input PDB file.
+        output_gro_path:
+          type: string
+          description: Path to the output GRO file.
+        output_top_zip_path:
+          type: string
+          description: Path the output TOP topology in zip format.
+        properties:
+          type: object
+          properties:
+            output_top_path:
+              type: string
+              default: p2g.top
+              description: Path of the output TOP file.
+            output_itp_path:
+              type: string
+              default: p2g.itp
+              description: Path of the output itp file.
+            water_type:
+              type: string
+              default: spce
+              description: Water molecule type.
+              enum:
+                - tip3p
+                - spce
+                - ...
+            force_field:
+              type: string
+              default: amber99sb-ildn
+              description: Force field to be used during the conversion.
+              enum:
+                - amber99sb-ildn
+                - oplsaa
+                - ...
+            ignh:
+              type: boolean
+              default: false
+              description: Should pdb2gmx ignore the hidrogens in the original structure.
+            gmx_path:
+              type: string
+              default: gmx
+              description: Path to the GROMACS executable binary.
+      additionalProperties: false
+    solvate:
+      title: 'Wrapper class for the GROMACS solvate (http://manual.gromacs.org/current/onlinehelp/gmx-solvate.html) module'
+      type: object
+      required:
+        - input_solute_gro_path
+        - output_gro_path
+        - input_tip_zip_path
+        - output_top_zip_path
+      properties:
+        input_solute_gro_path:
+          type: string
+          description: Path to the input GRO file
+        output_gro_path:
+          type: string
+          description: Path to the output GRO file
+        input_top_zip_path:
+          type: string
+          description: Path the input TOP topology in zip format
+        output_top_zip_path:
+          type: string
+          description: Path the output topology in zip format
+        properties:
+          type: object
+          properties:
+            output_top_path:
+              type: string
+              default: solvate.top
+              description: Path the output TOP file
+            input_solvent_gro_path:
+              type: string
+              default: spc216.gro
+              description: Path to the GRO file contanining the structure of the   solvent
+            gmx_path:
+              type: string
+              default: gmx
+              description: Path to the GROMACS executable binary
+      additionalProperties: false
+    
+    
+    
+    logs:
+      type: object
+      required:
+        - stdout
+        - stderr
+      properties:
+        stdout:
+          type: string
+          description: Redirected standard out from operations
+        stderr:
+          type: string
+          description: Redirected standard error from operations
+    error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
