@@ -1,0 +1,206 @@
+openapi: 3.0.0
+info:
+  title: biobb IO interface
+  version: '0.1'
+servers:
+  - url: 'http://mmb.irbbarcelona.org/api/v0.1/biobb_io'
+paths:
+  /pdb:
+    post:
+      operationId: pdb
+      description: Wrapper class for getting variants from UNIPROT MMB-IRB API"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/pdb'
+      responses:
+        '200':
+          description: stdout and stderr from operations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/logs'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /pdb_variants:
+    post:
+      operationId: pdb_variants
+      description: Wrapper class for getting variants from UNIPROT MMB-IRB API
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/pdb_variants'
+      responses:
+        '200':
+          description: stdout and stderr from operations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/logs'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /pdb_cluster_zip:
+    post:
+      operationId: pdb_cluster_zip
+      description: Wrapper class for getting structure clusters from PDB MMB-IRB API
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/pdb_cluster_zip'
+      responses:
+        '200':
+          description: stdout and stderr from operations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/logs'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  
+components:
+  schemas:
+    pdb:
+      title: Wrapper class for PDB download from PDB API
+      type: object
+      required:
+        - output_pdb_path
+      properties:
+        output_pdb_path:
+          type: string
+          description: Path to the output PDB file
+        properties:
+          type: object
+          required:
+            - pdb_code
+          properties:
+            pdb_code:
+              type: string
+              description: RCSB PDB code. ie. 2VBG
+            filter:
+              type: array
+              description: 'Array of groups to be keep. If value is None or False no filter will be applied. ll the possible values are defined in the official PDB specification (http://www.wwpdb.org documentation/file-format-content/format33/v3.3.html)'
+              default:
+                - ATOM
+                - MODEL
+                - ENDMDL
+              items:
+                type: string
+                enum:
+                  - ATOM
+                  - MODEL
+                  - ENDMDL
+                  - HETATM
+            url:
+              type: string
+              default: 'https://files.rcsb.org/download/'
+              format: url
+      additionalProperties: false
+      
+    pdb_variants:
+      title: Wrapper class for getting variants from UNIPROT MMB-IRB API
+      type: object
+      required:
+        - output_mutation_list_txt
+      properties:
+        output_mutationt_list_txt:
+          type: string
+          description: Path to the TXT file containing an ASCII comma separated values of the mutations
+        properties:
+          type: object
+          required:
+            - pdb_code
+          properties:
+            pdb_code:
+              type: string
+              description: RCSB PDB code. ie. 2VBG
+            url:
+              type: string
+              default: 'http://mmb.irbbarcelona.org/api/'
+              format: url
+      additionalProperties: false
+    
+    pdb_cluster_zip:
+      title: Wrapper class for getting structure clusters from PDB MMB-IRB API
+      type: object
+      required:
+        - output_pdb_zip_path
+      properties:
+        output_pdb_zip_path:
+          type: string
+          description: Path to the ZIP file containing the output PDB files.
+        properties:
+          type: object
+          required:
+            - pdb_code
+          properties:
+            pdb_code:
+              type: string
+              description: RCSB PDB code. ie. 2VBG
+            filter:
+              type: array
+              description: 'Array of groups to be keep. If value is None or False no filter will be applied. All the possible values are defined in the official PDB specification (http://www.wwpdb.org/documentation/file-format-content/format33/v3.3.html)'
+              default:
+                - ATOM
+                - MODEL
+                - ENDMDL
+              items:
+                type: string
+                enum:
+                  - ATOM
+                  - MODEL
+                  - ENDMDL
+                  - HETATM
+            cluster:
+              type: string
+              default: '90'
+              description: Cluster number
+              enum:
+                - '30'
+                - '50'
+                - '70'
+                - '90'
+                - '95'
+            url:
+              type: string
+              default: 'https://files.rcsb.org/download/'
+              format: url
+      additionalProperties: false
+    
+    logs:
+      type: object
+      required:
+        - stdout
+        - stderr
+      properties:
+        stdout:
+          type: string
+          description: Redirected standard out from operations
+        stderr:
+          type: string
+          description: Redirected standard     error from operations
+    error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
