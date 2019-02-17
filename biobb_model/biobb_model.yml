@@ -1,0 +1,117 @@
+openapi: 3.0.0
+info:
+  title: biobb Model interface
+  version: '0.1'
+servers:
+  - url: 'http://mmb.irbbarcelona.org/api/v0.1/biobb_model'
+paths:
+  /mutate:
+    post:
+      operationId: mutate
+      description: Module containing the Mutate class and the command line interface
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/mutate'
+      responses:
+        '200':
+          description: stdout and stderr from operations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/logs'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /fix_side_chain:
+    post:
+      operationId: fix_side_chain
+      description: Module containing the FixSideChain class and the command line interface
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/fix_side_chain'
+      responses:
+        '200':
+          description: stdout and stderr from operations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/logs'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  
+components:
+  schemas:
+    mutate:
+      title: Module containing the Mutate class and the command line interface
+      type: object
+      required:
+        - input_pdb_path
+        - output_pdb_path
+      properties:
+        input_pdb_path:
+          type: string
+          description: Path to the input PDB file
+        output_pdb_path:
+          type: string
+          description: Path to the output PDB file
+        properties:
+          type: object
+          required:
+            - mutation_list
+          properties:
+            mutation_list:
+              type: string
+              description: 'Mutation list in the format “Chain:WT_AA_ThreeLeterCode Resnum MUT_AA_ThreeLeterCode” (no spaces between the elements) separated by commas. If no chain is provided as chain code all the chains in the pdb file will be mutated. ie: A:ALA15CYS'
+      additionalProperties: false
+    fix_side_chain:
+      title: Module containing the FixSideChain class and the command line interface.
+      type: object
+      required:
+        - input_pdb_path
+        - output_pdb_path
+      properties:
+        input_pdb_path:
+          type: string
+          description: Path to the input PDB file
+        output_pdb_path:
+          type: string
+          description: Path to the output PDB file
+        properties:
+          type: object
+          additionalProperties: false
+          description: empty field to maintain compatibility
+      additionalProperties: false
+    logs:
+      type: object
+      required:
+        - stdout
+        - stderr
+      properties:
+        stdout:
+          type: string
+          description: Redirected standard out from operations
+        stderr:
+          type: string
+          description: Redirected standard     error from operations
+    error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
